@@ -8,6 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class ListViewActivity extends AppCompatActivity {
 
@@ -17,6 +21,21 @@ public class ListViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ListView myListView = (ListView)findViewById(R.id.myListView);
+
+        ArrayList<String> cities = new ArrayList<String>();
+
+        cities.add("Dublin");
+        cities.add("New York");
+        cities.add("San Francisco");
+        cities.add("London");
+        cities.add("Tokyo");
+        cities.add("Paris");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cities);
+
+        myListView.setAdapter(arrayAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
