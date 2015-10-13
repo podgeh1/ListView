@@ -5,11 +5,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,9 +25,9 @@ public class ListViewActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListView myListView = (ListView)findViewById(R.id.myListView);
+        final ListView myListView = (ListView)findViewById(R.id.myListView);
 
-        ArrayList<String> cities = new ArrayList<String>();
+        final ArrayList<String> cities = new ArrayList<String>();
 
         cities.add("Dublin");
         cities.add("New York");
@@ -36,6 +39,30 @@ public class ListViewActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cities);
 
         myListView.setAdapter(arrayAdapter);
+
+        //add funtionality to reconise a click
+        //add a listener
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //above, AdapterView is the listView thats being tapped
+                //View represents the thing that was actually tapped. i.e. in my case, the row
+                //position is the number of the row thats been tapped
+                //here, id is gonna be the same value as position
+
+
+                //logged the city that was tapped
+                Log.i("City Tapped:", cities.get(position));
+
+                //display a Toast
+                Toast.makeText(getApplicationContext(), "You tapped: " + cities.get(position), Toast.LENGTH_LONG).show();
+
+
+
+
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
